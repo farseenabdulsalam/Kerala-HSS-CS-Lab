@@ -42,3 +42,6 @@ You can find the source code and output for sql, c++, html and php lab assignmen
 If you need more programs, you can open an issue, open a pull request or mail me at farseenabdulsalam@gmail.com.
 
 You can download, modify and freely distribute these as long as you adhere by the license.
+
+## My Other Works
+[Click here] (http://farseenabdulsalam.github.io) to view my other works
