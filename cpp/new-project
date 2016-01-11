@@ -17,5 +17,6 @@ mkdir "$1"
 vim "$1/$1.cpp"
 vim "$1/input"
 ./makeit "$1"
-
+echo "Output:";
+cat "$1/output"
 exit
