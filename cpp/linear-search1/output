@@ -1,0 +1,15 @@
+Enter the number of students:10
+Enter admission numbers:
+[0]:101
+[1]:102
+[2]:103
+[3]:104
+[4]:105
+[5]:106
+[6]:107
+[7]:108
+[8]:109
+[9]:110
+
+Enter the admission no. to search:108
+Found 108 at index 7
