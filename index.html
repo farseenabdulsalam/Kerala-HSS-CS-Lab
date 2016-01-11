@@ -31,35 +31,61 @@
         <hr>
 
         <section id="main_content">
-          <h1>
-<a id="kerala-hss-cs-lab" class="anchor" href="#kerala-hss-cs-lab" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kerala HSS CS Lab</h1>
+          <h2>
+<a id="kerala-hss-cs-lab" class="anchor" href="#kerala-hss-cs-lab" aria-hidden="true"><span class="octicon octicon-link"></span></a>Kerala HSS CS Lab</h2>
 
 <p>Computer science lab assignments for Kerala higher secondary students</p>
 
 <p>You can find the source code and output for sql, c++, html and php lab assignments here.</p>
 
-<h1>
-<a id="download" class="anchor" href="#download" aria-hidden="true"><span class="octicon octicon-link"></span></a>Download</h1>
+<h2>
+<a id="download" class="anchor" href="#download" aria-hidden="true"><span class="octicon octicon-link"></span></a>Download</h2>
 
-<p>Click here to download: <a href="https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/zipball/master/">https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/zipball/master/</a></p>
+<p><a href="https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/zipball/master/">Click here to download</a></p>
 
-<h1>
-<a id="special-files" class="anchor" href="#special-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Special files</h1>
+<h2>
+<a id="special-files" class="anchor" href="#special-files" aria-hidden="true"><span class="octicon octicon-link"></span></a>Special files</h2>
 
-<p>'makeit' is a bash script I have written to automate compiling and preparing output of the programs.
-You can safely ignore that file.
-If you have a linux system, you can modify input, open a terminal in the corresponding folder (eg: cpp) and type ./makeit to create new output</p>
+<ul>
+<li>
+<p><code>makeit</code> is a bash script I have written to automate compiling and preparing output of the programs.
+Syntax:</p>
 
-<p>'input' is a file that is automatically input to the compiled program by 'makeit' and the output is stored in respective output folder</p>
+<pre><code>  ./makeit [output-type] [project-folder]
 
-<h1>
-<a id="work-in-progress" class="anchor" href="#work-in-progress" aria-hidden="true"><span class="octicon octicon-link"></span></a>Work in progress</h1>
+  output-type is cpp, output or both
+    cpp -- compile cpp files
+    output -- create output from compile program and `input` file
+    both -- both of the above
+    if output-type is absent, both is assumed
 
-<p>C++ is completed.
-SQL, PHP and HTML pending.</p>
+  [project-folders] is a list of the names of the project folders,
+  seperated by space. if absent, all projects is assumed
 
-<h1>
-<a id="enquiries" class="anchor" href="#enquiries" aria-hidden="true"><span class="octicon octicon-link"></span></a>Enquiries</h1>
+  example: ./makeit both array1
+</code></pre>
+
+<p>Students need not worry about this file.</p>
+
+<p>If you have a linux system, you can modify input, open a terminal in the folder containing makeit and type ./makeit to create new output</p>
+</li>
+<li><p><code>new-project</code> is also another bash script to speed up coding. You can safely ignore this file. Don't execute the file unless you know what you are doing.</p></li>
+<li>
+<code>rename-project</code> renames a source-code-folder, and the .cpp, .html, etc file inside it. You can safely ignore this file.</li>
+<li>
+<code>input</code> is a file inside every source-code-folder that is automatically input to the compiled program by 'makeit' and the output is stored in the source-code-folder itself</li>
+</ul>
+
+<h2>
+<a id="work-in-progress" class="anchor" href="#work-in-progress" aria-hidden="true"><span class="octicon octicon-link"></span></a>Work in progress</h2>
+
+<ul>
+<li>C++ is completed.</li>
+<li>SQL, PHP and HTML pending.</li>
+</ul>
+
+<h2>
+<a id="enquiries" class="anchor" href="#enquiries" aria-hidden="true"><span class="octicon octicon-link"></span></a>Enquiries</h2>
 
 <p>If you need more programs, you can open an issue, open a pull request or mail me at <a href="mailto:farseenabdulsalam@gmail.com">farseenabdulsalam@gmail.com</a>.</p>
 
