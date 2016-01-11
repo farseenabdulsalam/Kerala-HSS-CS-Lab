@@ -13,16 +13,19 @@ You can find the source code and output for sql, c++, html and php lab assignmen
   ```
     ./makeit [output-type] [project-folder]
 
-    output-type is cpp, output or both
-      cpp -- compile cpp files
-      output -- create output from compile program and `input` file
-      both -- both of the above
-      if output-type is absent, both is assumed
+    output-type is cpp(for cpp files only), output, pdf or all
+      cpp     -- compile cpp files
+      output  -- create output from the program (compiled program for cpp)
+                 and `input.txt` file
+      pdf     -- a pdf containing source code and output
+      all     -- all of the above
+
+      if output-type is absent, all is assumed
 
     [project-folders] is a list of the names of the project folders,
     seperated by space. if absent, all projects is assumed
 
-    example: ./makeit both array1
+    example: ./makeit all array1
   ```
   Students need not worry about this file.
 
