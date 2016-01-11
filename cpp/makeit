@@ -1,15 +1,21 @@
 #!/bin/bash
 
-
+# Compile cpp and produce binary
 # Expects the name of project as $1
 # compiles ./$1/$1.cpp to ./$1/$1
 # returns 1 if the folder contains
 # no cpp
+# exits with 1 if g++ fails
 function make_cpp {
   if [ -d "$1" -a -f "$1/$1.cpp" ]; then #$1 is a dir and $1/$1.cpp exists
 
     if [ "$1/$1.cpp" -nt "$1/$1" ]; then #$1.cpp is newer than $1 binary
       g++ "$1/$1.cpp" -o "$1/$1"
+      if [ $? -ne 0 ]; then
+        echo "There was an error compiling \"$1\"."
+        echo
+        exit 1
+      fi
       echo " + Compiled $1/$1.cpp"
     else
       echo " - $1/$1.cpp up to date"
@@ -19,8 +25,10 @@ function make_cpp {
   fi
 }
 
-#returns 1 if $1 is not a folder
-#returns 2 if $1/input doesnot exist
+# Pass the input.txt to the binary and
+# produce an output.txt
+# returns 1 if $1 is not a folder
+# returns 2 if $1/input doesnot exist
 function make_output {
   if [ ! -d "$1" ]; then # dir exists
     return 1
@@ -47,22 +55,53 @@ function make_output {
     echo " - $1/output.txt up to date"
   fi
 }
+
+# Combine source cpp and output.txt to a syntax highlighted
+# pdf
+function make_pdf {
+  if [ ! -d "$1" ]; then
+    return 1;
+  fi
+
+  if [ ! -f "$1/$1.cpp" -o ! -f "$1/output.txt" ]; then
+    return 2;
+  fi
+
+  if [ "$1/$1.pdf" -nt "$1/$1.cpp" -a "$1/$1.pdf" -nt "$1/output.txt" ]; then
+    echo " - $1/$1.pdf up to date "
+    return 0
+  fi
+
+  echo "<H1>${1^^}.CPP source</H1><BR>">"$1/head.tmp"
+  source-highlight -i "$1/$1.cpp" -o "$1/source.html" -H "$1/head.tmp"
+  echo "<H1>${1^^}.CPP output</H1><BR>">"$1/head.tmp"
+  source-highlight -i "$1/output.txt" -s bash -o "$1/output.html" -H "$1/head.tmp"
+  rm "$1/head.tmp"
+  wkhtmltopdf page "$1/source.html" page "$1/output.html" "$1/$1.pdf" >>wkhtmltopdf.log
+  if [ $? -ne 0 ]; then
+    echo " X Failed to create $1/$1.pdf. Please check the logs"
+  fi
+  rm "$1/source.html" "$1/output.html"
+  echo " + Created $1/$1.pdf"
+}
 ################ main #####################
 
 # no arg or arg is help
 if [ "$1" = "help" ]; then
   echo "makeit: Compiles cpp files and provides output."
-  echo "Syntax: makeit [cpp|output|fullpdf] (all|<project-folder>)"
+  echo "Syntax: makeit [cpp|output|pdf|all] [<project-folder>]"
   echo "Requires: bash (version>=4.0) for this script"
   echo "          gcc for compiling c++"
   echo "          awk, script for combining input and output"
+  echo "          source-highlight for creating syntax-highlighted html from source"
+  echo "          wkhtmltopdf for converting html to pdf"
   exit 0
 fi
 
 _compile="cpp"
 _projects=(*/)
 case $1 in
-  cpp|output|fullpdf) _compile=$1; shift;;
+  cpp|output|pdf|all) _compile=$1; shift;;
   #shift shifts $2-->$1; old $1 gets destroyed
 esac
 
@@ -95,6 +134,15 @@ function compile_output_from_array {
   done
 }
 
+function compile_pdf_from_array {
+  for project in ${_projects[@]%/}; do
+    make_pdf "$project"
+    if [ $? -ne 0 ]; then
+      echo " X Invalid project folder or source/output not found: $project"
+      return 1
+    fi
+  done
+}
 case $_compile in
   cpp)
     compile_cpp_from_array
@@ -102,9 +150,19 @@ case $_compile in
   output)
     compile_output_from_array
     ;;
-  both)
+  pdf)
+    compile_pdf_from_array
+    ;;
+  all)
+    echo "Compiling CPP.."
     compile_cpp_from_array
+    echo "----------------"
+    echo "Producing Output.."
     compile_output_from_array
+    echo "----------------"
+    echo "Creating PDF.."
+    compile_pdf_from_array
+    echo "----------------"
     ;;
 esac
 
