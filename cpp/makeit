@@ -26,21 +26,25 @@ function make_output {
     return 1
   fi
 
-  if [ ! -f "$1/input" ]; then #input exists
+  if [ ! -f "$1/input.txt" ]; then #input exists
     return 2
   fi
 
+  if [ ! -f "$1/$1" ]; then #input exists
+    return 3
+  fi
+
   #output is older than input or binary
-  if [ "$1/output" -ot "$1/input" -o "$1/output" -ot "$1/$1" ]; then
+  if [ "$1/output.txt" -ot "$1/input.txt" -o "$1/output.txt" -ot "$1/$1" ]; then
     #record stdin and stdout to a file (man script for more info)
     #awk sleep helps to prevent stdin being written before stdout
-    awk '{ system("sleep 0.01");print }' "$1/input" |script -qc "$1/$1" $1/output.tmp >$1/output
+    awk '{ system("sleep 0.01");print }' "$1/input.txt" |script -qc "$1/$1" $1/output.tmp >$1/output.txt
     #tmp file is a workaround against a bug in `script`
     #which doesnot obey -q
     rm $1/output.tmp
-    echo " + Created $1/output"
+    echo " + Created $1/output.txt"
   else
-    echo " - $1/output up to date"
+    echo " - $1/output.txt up to date"
   fi
 }
 ################ main #####################
@@ -48,14 +52,17 @@ function make_output {
 # no arg or arg is help
 if [ "$1" = "help" ]; then
   echo "makeit: Compiles cpp files and provides output."
-  echo "Syntax: makeit [cpp|output|both] (all|<project-folder>)"
+  echo "Syntax: makeit [cpp|output|fullpdf] (all|<project-folder>)"
+  echo "Requires: bash (version>=4.0) for this script"
+  echo "          gcc for compiling c++"
+  echo "          awk, script for combining input and output"
   exit 0
 fi
 
-_compile="both"
+_compile="cpp"
 _projects=(*/)
 case $1 in
-  cpp|output|both) _compile=$1; shift;;
+  cpp|output|fullpdf) _compile=$1; shift;;
   #shift shifts $2-->$1; old $1 gets destroyed
 esac
 

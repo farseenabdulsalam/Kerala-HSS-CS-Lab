@@ -1,0 +1,59 @@
+<!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">/*</font></i>
+<i><font color="#9A1900"> * Q: Read N numbers into an array</font></i>
+<i><font color="#9A1900"> * and print those which are larger than</font></i>
+<i><font color="#9A1900"> * the average</font></i>
+<i><font color="#9A1900"> */</font></i>
+
+<b><font color="#000080">#include</font></b> <font color="#FF0000">&lt;iostream&gt;</font>
+
+<b><font color="#0000FF">using</font></b> <b><font color="#0000FF">namespace</font></b> std<font color="#990000">;</font>
+
+<font color="#009900">int</font> <b><font color="#000000">main</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+
+  <i><font color="#9A1900">//Defining variables</font></i>
+  <font color="#009900">int</font> array<font color="#990000">[</font><font color="#993399">100</font><font color="#990000">];</font> <i><font color="#9A1900">//to store umbers entered by user</font></i>
+  <font color="#009900">int</font> N<font color="#990000">;</font>          <i><font color="#9A1900">//how many items will be entered</font></i>
+  <font color="#009900">int</font> avg<font color="#990000">;</font>        <i><font color="#9A1900">//to store average of numbers in array</font></i>
+
+  cout<font color="#990000">&lt;&lt;</font><font color="#FF0000">"How many numbers would you like: "</font><font color="#990000">;</font>
+  cin<font color="#990000">&gt;&gt;</font>N<font color="#990000">;</font>
+  cout<font color="#990000">&lt;&lt;</font><font color="#FF0000">"Enter the numbers:"</font><font color="#990000">&lt;&lt;</font>endl<font color="#990000">;</font>
+
+  <i><font color="#9A1900">//Reading into array[0], array[1],</font></i>
+  <i><font color="#9A1900">//array[2]....., array[N-1]</font></i>
+  <b><font color="#0000FF">for</font></b><font color="#990000">(</font><font color="#009900">int</font> i<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">;</font> i<font color="#990000">&lt;</font>N<font color="#990000">;</font> i<font color="#990000">++)</font> <font color="#FF0000">{</font>
+    cin<font color="#990000">&gt;&gt;</font>array<font color="#990000">[</font>i<font color="#990000">];</font>
+  <font color="#FF0000">}</font>
+
+  avg<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">;</font>
+
+  <i><font color="#9A1900">//Average = Sum of all numbers / Total number of items</font></i>
+
+  <i><font color="#9A1900">//Step 1: Sum of all numbers</font></i>
+  <i><font color="#9A1900">//avg = array[0] + .... + array[N-1]</font></i>
+  <b><font color="#0000FF">for</font></b><font color="#990000">(</font><font color="#009900">int</font> i<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">;</font> i<font color="#990000">&lt;</font>N<font color="#990000">;</font> i<font color="#990000">++)</font> <font color="#FF0000">{</font>
+    avg<font color="#990000">+=</font>array<font color="#990000">[</font>i<font color="#990000">];</font>
+  <font color="#FF0000">}</font>
+
+  <i><font color="#9A1900">//Step 2: Divide by total number of items</font></i>
+  avg<font color="#990000">/=</font>N<font color="#990000">;</font>
+
+  cout<font color="#990000">&lt;&lt;</font>endl<font color="#990000">&lt;&lt;</font><font color="#FF0000">"The average is: "</font><font color="#990000">&lt;&lt;</font>avg<font color="#990000">&lt;&lt;</font>endl<font color="#990000">;</font>
+  cout<font color="#990000">&lt;&lt;</font>endl<font color="#990000">;</font>
+  cout<font color="#990000">&lt;&lt;</font><font color="#FF0000">"The numbers greater than average are:"</font><font color="#990000">&lt;&lt;</font>endl<font color="#990000">;</font>
+
+  <i><font color="#9A1900">//if array[0]&gt;avg, print array[0] ... array[N-1]&gt;avg, print array[N-1]</font></i>
+  <b><font color="#0000FF">for</font></b><font color="#990000">(</font><font color="#009900">int</font> i<font color="#990000">=</font><font color="#993399">0</font><font color="#990000">;</font> i<font color="#990000">&lt;</font>N<font color="#990000">;</font> i<font color="#990000">++)</font> <font color="#FF0000">{</font>
+    <b><font color="#0000FF">if</font></b><font color="#990000">(</font>array<font color="#990000">[</font>i<font color="#990000">]&gt;</font>avg<font color="#990000">)</font> cout<font color="#990000">&lt;&lt;</font>array<font color="#990000">[</font>i<font color="#990000">]&lt;&lt;</font>endl<font color="#990000">;</font>
+  <font color="#FF0000">}</font>
+  cout<font color="#990000">&lt;&lt;</font>endl<font color="#990000">;</font>
+
+  <i><font color="#9A1900">//Tell the operating system that everything is OK (exit code 0)</font></i>
+  <i><font color="#9A1900">//More info in higher classes</font></i>
+  <b><font color="#0000FF">return</font></b> <font color="#993399">0</font><font color="#990000">;</font>
+<font color="#FF0000">}</font>
+</tt></pre>

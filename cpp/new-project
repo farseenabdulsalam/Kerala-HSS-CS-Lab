@@ -15,8 +15,8 @@ fi
 
 mkdir "$1"
 vim "$1/$1.cpp"
-vim "$1/input"
+vim "$1/input.txt"
 ./makeit "$1"
 echo "Output:";
-cat "$1/output"
+cat "$1/output.txt"
 exit
