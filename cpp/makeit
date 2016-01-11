@@ -1,0 +1,104 @@
+#!/bin/bash
+
+
+# Expects the name of project as $1
+# compiles ./$1/$1.cpp to ./$1/$1
+# returns 1 if the folder contains
+# no cpp
+function make_cpp {
+  if [ -d "$1" -a -f "$1/$1.cpp" ]; then #$1 is a dir and $1/$1.cpp exists
+
+    if [ "$1/$1.cpp" -nt "$1/$1" ]; then #$1.cpp is newer than $1 binary
+      g++ "$1/$1.cpp" -o "$1/$1"
+      echo " + Compiled $1/$1.cpp"
+    else
+      echo " - $1/$1.cpp up to date"
+    fi
+  else
+    return 1
+  fi
+}
+
+#returns 1 if $1 is not a folder
+#returns 2 if $1/input doesnot exist
+function make_output {
+  if [ ! -d "$1" ]; then # dir exists
+    return 1
+  fi
+
+  if [ ! -f "$1/input" ]; then #input exists
+    return 2
+  fi
+
+  #output is older than input or binary
+  if [ "$1/output" -ot "$1/input" -o "$1/output" -ot "$1/$1" ]; then
+    #record stdin and stdout to a file (man script for more info)
+    #awk sleep helps to prevent stdin being written before stdout
+    awk '{ system("sleep 0.01");print }' "$1/input" |script -qc "$1/$1" $1/output.tmp >$1/output
+    #tmp file is a workaround against a bug in `script`
+    #which doesnot obey -q
+    rm $1/output.tmp
+    echo " + Created $1/output"
+  else
+    echo " - $1/output up to date"
+  fi
+}
+################ main #####################
+
+# no arg or arg is help
+if [ "$1" = "help" ]; then
+  echo "makeit: Compiles cpp files and provides output."
+  echo "Syntax: makeit [cpp|output|both] (all|<project-folder>)"
+  exit 0
+fi
+
+_compile="both"
+_projects=(*/)
+case $1 in
+  cpp|output|both) _compile=$1; shift;;
+  #shift shifts $2-->$1; old $1 gets destroyed
+esac
+
+#if project name is present, only compile given projs
+if [ ! -z "$1" ]; then
+  _projects=($*)
+fi
+
+echo "Making: $_compile"
+echo "Projects: ${_projects[@]%/}"
+echo
+
+function compile_cpp_from_array {
+  for project in ${_projects[@]%/}; do
+    make_cpp "$project"
+    if [ $? -ne 0 ]; then
+      echo " X Invalid project folder: $project"
+      return 1
+    fi
+  done
+}
+
+function compile_output_from_array {
+  for project in ${_projects[@]%/}; do
+    make_output "$project"
+    if [ $? -ne 0 ]; then
+      echo " X Invalid project folder or input not found: $project"
+      return 1
+    fi
+  done
+}
+
+case $_compile in
+  cpp)
+    compile_cpp_from_array
+    ;;
+  output)
+    compile_output_from_array
+    ;;
+  both)
+    compile_cpp_from_array
+    compile_output_from_array
+    ;;
+esac
+
+exit 0
