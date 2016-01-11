@@ -20,7 +20,7 @@ You can find the source code and output for sql, c++, html and php lab assignmen
 
   Students need not worry about this file.
 
-If you have a linux system, you can modify input, open a terminal in the folder containing makeit and type ./makeit to create new output
+  If you have a linux system, you can modify input, open a terminal in the folder containing makeit and type ./makeit to create new output
 
 * `new-project` is also another bash script to speed up coding. You can safely ignore this file. Don't execute the file unless you know what you are doing.
 * `rename-project` renames a source-code-folder, and the .cpp, .html, etc file inside it. You can safely ignore this file.
