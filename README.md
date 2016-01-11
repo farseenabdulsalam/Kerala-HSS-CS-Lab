@@ -10,6 +10,7 @@ You can find the source code and output for sql, c++, html and php lab assignmen
 ## Special files
 * `makeit` is a bash script I have written to automate compiling and preparing output of the programs.
   Syntax:
+  ```
     ./makeit [output-type] [project-folder]
     output-type is cpp, output or both
       cpp -- compile cpp files
@@ -18,6 +19,8 @@ You can find the source code and output for sql, c++, html and php lab assignmen
       if output-type is absent, both is assumed
       [project-folders] is a list of the names of the project folders, seperated by space. if absent, all projects is assumed
 
+      example: ./makeit both array1
+    ```
   Students need not worry about this file.
 
   If you have a linux system, you can modify input, open a terminal in the folder containing makeit and type ./makeit to create new output
