@@ -35,7 +35,9 @@ You can find the source code and output for sql, c++, html and php lab assignmen
 
 ## Work in progress
 - [x] C++ is completed.
-- [ ] SQL, PHP and HTML pending.
+- [ ] SQL
+- [ ] PHP
+- [ ] HTML
 
 
 ## Enquiries
@@ -44,4 +46,4 @@ If you need more programs, you can open an issue, open a pull request or mail me
 You can download, modify and freely distribute these as long as you adhere by the license.
 
 ## My Other Works
-[Click here] (http://farseenabdulsalam.github.io) to view my other works
+#####[Click here] (http://farseenabdulsalam.github.io) to view my other works
