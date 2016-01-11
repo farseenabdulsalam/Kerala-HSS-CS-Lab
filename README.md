@@ -36,7 +36,9 @@ You can find the source code and output for sql, c++, html and php lab assignmen
 
 * `new-project` is also another bash script to speed up coding. You can safely ignore this file. Don't execute the file unless you know what you are doing.
 * `rename-project` renames a source-code-folder, and the .cpp, .html, etc file inside it. You can safely ignore this file.
-* `input` is a file inside every source-code-folder that is automatically input to the compiled program by 'makeit' and the output is stored in the source-code-folder itself
+* `input.txt` is a file inside every source-code-folder that is automatically input to the compiled program by 'makeit' and the output is stored in the source-code-folder as output.txt
+* `make-complete-pdf` is used to create a single PDF by combining all pdfs from subfolders
+
 
 
 ## Work in progress
