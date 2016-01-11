@@ -4,16 +4,20 @@ Computer science lab assignments for Kerala higher secondary students
 
 You can find the source code and output for sql, c++, html and php lab assignments here.
 
+#Download
+Click here to download: https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/zipball/master/
+
 #Special files
 'makeit' is a bash script I have written to automate compiling and preparing output of the programs.
 You can safely ignore that file.
+If you have a linux system, you can modify input, open a terminal in the corresponding folder (eg: cpp) and type ./makeit to create new output
 
-'input' is a file that is automatically input to the compiled program by 'makeit' and the output is 
-stored in respective output folder
+
+'input' is a file that is automatically input to the compiled program by 'makeit' and the output is stored in respective output folder
 
 
 # Work in progress
-C++ is completed. 
+C++ is completed.
 SQL, PHP and HTML pending.
 
 
