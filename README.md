@@ -34,8 +34,8 @@ You can find the source code and output for sql, c++, html and php lab assignmen
 
 
 ## Work in progress
-* C++ is completed.
-* SQL, PHP and HTML pending.
+[x] C++ is completed.
+[ ] SQL, PHP and HTML pending.
 
 
 ## Enquiries
