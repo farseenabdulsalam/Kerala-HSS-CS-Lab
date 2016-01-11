@@ -5,7 +5,10 @@ Computer science lab assignments for Kerala higher secondary students
 You can find the source code and output for sql, c++, html and php lab assignments here.
 
 ## Download
-[Click here to download] (https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/zipball/master/)
+ * [Click here to download] (https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/zipball/master/) all files in a zip file
+ * [Click here to download] (https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/raw/master/cpp/CPP.pdf) CPP.pdf which contains all C++ program source code and output.
+
+ I'll upload other files when I get free time
 
 ## Special files
 * `makeit` is a bash script I have written to automate compiling and preparing output of the programs.
@@ -13,7 +16,7 @@ You can find the source code and output for sql, c++, html and php lab assignmen
   ```
     ./makeit [output-type] [project-folder]
 
-    output-type is cpp(for cpp files only), output, pdf or all
+    output-type is either cpp(for cpp folder only), output, pdf or all
       cpp     -- compile cpp files
       output  -- create output from the program (compiled program for cpp)
                  and `input.txt` file
