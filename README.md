@@ -6,7 +6,7 @@ You can find the source code and output for sql, c++, html and php lab assignmen
 
 ## Download
  * [Click here to download] (https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/zipball/master/) all files in a zip file
- * [Click here to download] (https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/raw/master/cpp/CPP.pdf) CPP.pdf which contains all C++ program source code and output.
+ * [Click here to download] (https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/raw/master/cpp/PDF/CPP.pdf) CPP.pdf which contains all C++ program source code and output.
 
  I'll upload other files when I get free time
 
@@ -36,9 +36,9 @@ You can find the source code and output for sql, c++, html and php lab assignmen
 
 * `new-project` is also another bash script to speed up coding. You can safely ignore this file. Don't execute the file unless you know what you are doing.
 * `rename-project` renames a source-code-folder, and the .cpp, .html, etc file inside it. You can safely ignore this file.
-* `input.txt` is a file inside every source-code-folder that is automatically input to the compiled program by 'makeit' and the output is stored in the source-code-folder as output.txt
-* `make-complete-pdf` is used to create a single PDF by combining all pdfs from subfolders
-
+* `input.txt` is a file inside every source-code-folder that is automatically input to the compiled program by 'makeit' and the output is stored in the source-code-folder as output.txt.
+* `make-complete-pdf` is used to create a single PDF by combining all pdfs from subfolders.
+* `make-cover-pdf` used to create cover page of CPP.pdf.
 
 
 ## Work in progress
