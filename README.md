@@ -68,10 +68,10 @@ You can find the source code and output for sql, c++, html and php lab assignmen
 
 
 ## Work in progress
-- [x] C++ is completed.
-- [ ] SQL
-- [ ] PHP
-- [ ] HTML
+  [x] C++ is completed.
+  [ ] SQL
+  [ ] PHP
+  [ ] HTML
 
 
 ## Enquiries
