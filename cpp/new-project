@@ -1,4 +1,6 @@
 #!/bin/bash
+_SOURCE_DIR='./programs/'
+cd $_SOURCE_DIR;
 
 if [ $# -ne 1 -o "$1" = "-help" -o "$1" = "--help" -o "$1" = "-h" ]; then
   echo "Creates a new cpp project."
@@ -16,7 +18,8 @@ fi
 mkdir "$1"
 vim "$1/$1.cpp"
 vim "$1/input.txt"
+cd ..
 ./makeit "$1"
 echo "Output:";
-cat "$1/output.txt"
+cat "$_SOURCE_DIR/$1/output.txt"
 exit

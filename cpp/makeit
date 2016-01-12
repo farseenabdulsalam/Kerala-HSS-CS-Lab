@@ -1,5 +1,8 @@
 #!/bin/bash
 
+_SOURCE_DIR="./programs"
+
+cd $_SOURCE_DIR
 # Compile cpp and produce binary
 # Expects the name of project as $1
 # compiles ./$1/$1.cpp to ./$1/$1
@@ -98,7 +101,7 @@ if [ "$1" = "help" ]; then
   exit 0
 fi
 
-_compile="cpp"
+_compile="all"
 _projects=(*/)
 case $1 in
   cpp|output|pdf|all) _compile=$1; shift;;
@@ -165,5 +168,5 @@ case $_compile in
     echo "----------------"
     ;;
 esac
-
+cd ..
 exit 0

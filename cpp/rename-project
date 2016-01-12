@@ -1,4 +1,8 @@
 #!/bin/bash
+
+_SOURCE_DIR="./programs"
+cd $_SOURCE_DIR
+
 if [ $# -lt 2 ]; then
   echo "Usage:"
   echo "      rename-project old_folder_name new_folder_name"
@@ -45,3 +49,4 @@ case $_reply in
   ;;
 esac
 
+cd ..

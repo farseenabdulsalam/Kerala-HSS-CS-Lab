@@ -9,6 +9,10 @@ case "$1" in
     ;;
 esac
 
+_SOURCE_DIR="./programs/"
+
+cd $_SOURCE_DIR
+
 folders=(*/)
 files=()
 for folder in ${folders[@]%/}; do
@@ -28,7 +32,8 @@ fi
 
 echo "Combining ${files[@]}."
 read -p "Continue? [y/N] " -N 1 -r reply
+echo
 if [ ${reply^^} = "Y" ]; then
-  pdfunite ${files[@]} CPP.pdf
+  pdfunite ../PDF/src/cover.pdf ${files[@]} ../PDF/CPP.pdf 
   echo " ++ Created CPP.pdf"
 fi
