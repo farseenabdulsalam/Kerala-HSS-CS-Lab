@@ -12,7 +12,7 @@ cd $_SOURCE_DIR
 function make_cpp {
   if [ -d "$1" -a -f "$1/$1.cpp" ]; then #$1 is a dir and $1/$1.cpp exists
 
-    if [ "$1/$1.cpp" -nt "$1/$1" ]; then #$1.cpp is newer than $1 binary
+    if [ "$2" = "force" -o "$1/$1.cpp" -nt "$1/$1" ]; then #$1.cpp is newer than $1 binary
       g++ "$1/$1.cpp" -o "$1/$1"
       if [ $? -ne 0 ]; then
         echo "There was an error compiling \"$1\"."
@@ -46,7 +46,7 @@ function make_output {
   fi
 
   #output is older than input or binary
-  if [ "$1/output.txt" -ot "$1/input.txt" -o "$1/output.txt" -ot "$1/$1" ]; then
+  if [ "$2" = "force" -o "$1/output.txt" -ot "$1/input.txt" -o "$1/output.txt" -ot "$1/$1" ]; then
     #record stdin and stdout to a file (man script for more info)
     #awk sleep helps to prevent stdin being written before stdout
     awk '{ system("sleep 0.01");print }' "$1/input.txt" |script -qc "$1/$1" $1/output.tmp >$1/output.txt
@@ -70,16 +70,25 @@ function make_pdf {
     return 2;
   fi
 
-  if [ "$1/$1.pdf" -nt "$1/$1.cpp" -a "$1/$1.pdf" -nt "$1/output.txt" ]; then
+  if [ "$2" != "force" -a "$1/$1.pdf" -nt "$1/$1.cpp" -a "$1/$1.pdf" -nt "$1/output.txt" ]; then
     echo " - $1/$1.pdf up to date "
     return 0
   fi
 
-  echo "<H1>${1^^}.CPP source</H1><BR>">"$1/head.tmp"
-  source-highlight -i "$1/$1.cpp" -o "$1/source.html" -H "$1/head.tmp"
-  echo "<H1>${1^^}.CPP output</H1><BR>">"$1/head.tmp"
-  source-highlight -i "$1/output.txt" -s bash -o "$1/output.html" -H "$1/head.tmp"
-  rm "$1/head.tmp"
+  echo "<H1>${1^^}.CPP source</H1>">"$1/head.tmp"
+
+  echo "<style> body,pre,tt { font-family: Fantasque Sans Mono,Consolas, Menlo, Monaco,\
+Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono,\
+Courier New, monospace;font-size:12px; } h1 {text-shadow: 1px 1px 1px #ccc;border: solid 1px #eee;padding: 0.5em}\
+tt {background-color: rgb(240, 240, 240);display: block;padding: 1em;border: solid 1px #eee;}\
+body{padding: 1.5em;}</style>">"$1/foot.tmp"
+
+  source-highlight -n -i "$1/$1.cpp" -o "$1/source.html" -H "$1/head.tmp" -F "$1/foot.tmp"
+  echo "<H1>${1^^}.CPP output</H1>">"$1/head.tmp"
+  source-highlight -n -i "$1/output.txt" -s bash -o "$1/output.html" -H "$1/head.tmp" -F "$1/foot.tmp"
+
+  rm "$1/head.tmp" "$1/foot.tmp"
+
   wkhtmltopdf page "$1/source.html" page "$1/output.html" "$1/$1.pdf" >>wkhtmltopdf.log
   if [ $? -ne 0 ]; then
     echo " X Failed to create $1/$1.pdf. Please check the logs"
@@ -102,10 +111,15 @@ if [ "$1" = "help" ]; then
 fi
 
 _compile="all"
+_force=""
 _projects=(*/)
 case $1 in
   cpp|output|pdf|all) _compile=$1; shift;;
   #shift shifts $2-->$1; old $1 gets destroyed
+esac
+
+case $1 in
+  "--force") _force="force"; shift;;
 esac
 
 #if project name is present, only compile given projs
@@ -119,7 +133,7 @@ echo
 
 function compile_cpp_from_array {
   for project in ${_projects[@]%/}; do
-    make_cpp "$project"
+    make_cpp "$project" "$_force"
     if [ $? -ne 0 ]; then
       echo " X Invalid project folder: $project"
       return 1
@@ -129,7 +143,7 @@ function compile_cpp_from_array {
 
 function compile_output_from_array {
   for project in ${_projects[@]%/}; do
-    make_output "$project"
+    make_output "$project" "$_force"
     if [ $? -ne 0 ]; then
       echo " X Invalid project folder or input not found: $project"
       return 1
@@ -139,7 +153,7 @@ function compile_output_from_array {
 
 function compile_pdf_from_array {
   for project in ${_projects[@]%/}; do
-    make_pdf "$project"
+    make_pdf "$project" "$_force"
     if [ $? -ne 0 ]; then
       echo " X Invalid project folder or source/output not found: $project"
       return 1
