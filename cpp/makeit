@@ -101,7 +101,7 @@ body{padding: 1.5em;}</style>">"$1/foot.tmp"
 # no arg or arg is help
 if [ "$1" = "help" ]; then
   echo "makeit: Compiles cpp files and provides output."
-  echo "Syntax: makeit [cpp|output|pdf|all] [<project-folder>]"
+  echo "Syntax: makeit [cpp|output|pdf|all] [--force] [<project-folder>]"
   echo "Requires: bash (version>=4.0) for this script"
   echo "          gcc for compiling c++"
   echo "          awk, script for combining input and output"
