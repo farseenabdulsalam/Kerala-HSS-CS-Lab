@@ -15,16 +15,25 @@ function make_pdf {
     return 2;
   fi
 
-  if [ "$1/$1.pdf" -nt "$1/$1.html" ]; then
+  if [ "$2" != "force" -a "$1/$1.pdf" -nt "$1/$1.html" ]; then
     echo " - $1/$1.pdf up to date "
     return 0
   fi
 
   echo "<H1>${1^^}.HTML source</H1><BR>">"$1/head.tmp"
-  source-highlight -i "$1/$1.html" -o "$1/source.html" -H "$1/head.tmp"
+  echo "<style> body,pre,tt { font-family: Fantasque Sans Mono,Consolas, Menlo, Monaco,\
+Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono,\
+Courier New, monospace;font-size:12px; } h1 {text-shadow: 1px 1px 1px #ccc;border: solid 1px #eee;padding: 0.5em}\
+tt {background-color: rgb(240, 240, 240);display: block;padding: 1em;border: solid 1px #eee;}\
+body{padding: 1.5em;}</style>">"$1/foot.tmp"
+
+source-highlight -i "$1/$1.html" -o "$1/source.html" -H "$1/head.tmp" -F "$1/foot.tmp"
+
   echo "<H1>${1^^}.HTML output</H1><BR>">"$1/head.tmp"
+
   cat "$1/head.tmp" "$1/$1.html" >"$1/output.html"
-  rm "$1/head.tmp"
+
+  rm "$1/head.tmp" "$1/foot.tmp"
   wkhtmltopdf page "$1/source.html" page "$1/output.html" "$1/$1.pdf" >>wkhtmltopdf.log
   if [ $? -ne 0 ]; then
     echo " X Failed to create $1/$1.pdf. Please check the logs"
@@ -37,7 +46,7 @@ function make_pdf {
 # no arg or arg is help
 if [ "$1" = "help" ]; then
   echo "makeit: Create PDF file containing source and output from HTML."
-  echo "Syntax: makeit [<project-folder>]"
+  echo "Syntax: makeit [--force] [<project-folder>]"
   echo "Requires: bash (version>=4.0) for this script"
   echo "          gcc for compiling c++"
   echo "          awk, script for combining input and output"
@@ -47,6 +56,10 @@ if [ "$1" = "help" ]; then
 fi
 
 _projects=(*/)
+_force=""
+case $1 in
+  "--force") _force="force"; shift;;
+esac
 
 #if project name is present, only compile given projs
 if [ ! -z "$1" ]; then
@@ -59,7 +72,7 @@ echo
 
 function compile_pdf_from_array {
   for project in ${_projects[@]%/}; do
-    make_pdf "$project"
+    make_pdf "$project" "$_force"
     if [ $? -ne 0 ]; then
       echo " X Invalid project folder or source not found: $project"
       return 1
