@@ -1,0 +1,32 @@
+<!--
+  Imagine that your school is hosting an inter-school IT fair. Design an HTML form for accepting registrations.
+  The form page should contain facility to enter:
+    * School name * User name * Password * Mobile phone no.
+  It should also contain a button for saving and clearing the details entered
+-->
+
+<html>
+  <head> <title> Registration - Interschool IT Fair </title> </head>
+
+  <body>
+    <!-- Students can ignore style tag -->
+    <style>
+     body {font-family: Fantasque Sans Mono, Ubuntu Mono, monospace;}
+     input { width:10em; height:2em; margin:0.2em;}
+    </style>
+
+    <h1>Registration - Interschool IT Fair</h1>
+
+    <form name=form1 action=register.php method=POST>
+
+      School name: <input type=text name=school_name> <br>
+      User name  : <input type=text name=user_name> <br>
+      Password   : <input type=password name=pw> <br>
+      Repeat Password: <input type=password name=pw2> <br>
+      Mobile No.     : <input type=text name=mobile> <br> <br>
+
+      <input type=submit value=Submit> <input type=reset value=Clear>
+
+      </form>
+  </body>
+</html>

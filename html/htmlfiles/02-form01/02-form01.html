@@ -1,0 +1,62 @@
+<!--  
+
+  Design an HTML form to accept the curriculum
+  vitae of a job applicant.
+
+  The form should provide facility to accept:
+    * Name
+    * Address in multiple lines
+    * Gender using option button
+    * Nationality using a list box
+    * Hobbies using check boxes
+
+  The form should provide buttons to save and clear
+  the contents of text boxes
+
+-->
+
+<html>
+  
+  <head> <title> Job Application </title> </head>
+  
+  <body>
+    <!-- Students can ignore the style tag. It is used to make the page look more beautiful -->
+<style>
+body { font-family: Fantasque Sans Mono, Ubuntu Mono, monospace; }
+input[type=text] {margin-left:5em;height:2em; width: 15em;}
+select {margin-left:0.5em;height:2em; width: 15em;}
+input[type=submit], input[type=reset] { width:5em; height:2em;}
+textarea         { margin-left:9.5em;height:5em; width: 15em;}
+br { height:2em; margin:0.8em;}
+</style>
+    <h1> Job Application </h1>
+
+    <form name=form1 action=apply.php method=POST>
+
+      Name: <input type=text name=name> <br>
+      Address: <br>
+      <textarea name=name></textarea> <br>
+      Gender: 
+      Male <input type=radio name=gender value=Male>
+      Female <input type=radio name=gender value=Female>
+      <br>
+      Nationality:
+      <select name=nationality>
+        <option>Indian</option>
+        <option>Pakistan</option>
+        <option>USA</option>
+        <option>UK</option>
+        <option>China</option>
+        <option>Other</option>
+      </select>
+      <br>
+      Hobbies: <br>
+      <input type=checkbox name=hobby_music> Music <br>
+      <input type=checkbox name=hobby_read> Read Books<br>
+      <input type=checkbox name=hobby_sports> Sports <br>
+
+      <input type=submit value=Submit> <input type=reset value=Clear>
+    </form>
+
+  </body>
+</html>
