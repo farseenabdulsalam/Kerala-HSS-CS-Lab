@@ -33,6 +33,7 @@ You can find the source code and output for sql, c++, html and php lab assignmen
 ## Download
  * [Click here to download] (https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/zipball/master/) all files in a zip file
  * [Click here to download] (https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/raw/master/cpp/PDF/CPP.pdf) CPP.pdf which contains all C++ program source code and output.
+ * [Click here to download] (https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/raw/master/html/PDF/HTML.pdf) HTML.pdf which contains all html source code and output.
 
  I'll upload other files when I get free time
 
@@ -69,9 +70,9 @@ You can find the source code and output for sql, c++, html and php lab assignmen
 
 ## Work in progress
  * [x] C++ Completed.
+ * [x] HTML Pending
  * [ ] SQL Pending
  * [ ] PHP Pending
- * [ ] HTML Pending
 
 
 ## Enquiries
