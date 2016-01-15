@@ -1,3 +1,6 @@
 name: Kerala HSS CS Lab
+desc: Computer Science Lab Assignments source code and output with explanatory comments as PDF files
+gh-user: farseenabdulsalam
+gh-proj: Kerala-HSS-CS-Lab
 markdown: redcarpet
 baseurl: '/Kerala-HSS-CS-Lab'
