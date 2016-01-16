@@ -1,6 +1,4 @@
 ---
-title: Kerala HSS CS Lab
-show: true
 ---
 ## Kerala HSS CS Lab
 Computer science lab assignments for Kerala higher secondary students
