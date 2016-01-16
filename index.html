@@ -7,7 +7,7 @@ default: true
   {% for page in site.pages %}
   <div>
   {% if ! page.default %}
-   {{ page.content }}
+   {{ page.content | replace: '<li>[ ]', '<li class = "box">' | replace: '<li>[x]', '<li class = "box_done">'  }}
    {% endif %}
   </div>
   {% endfor %}
