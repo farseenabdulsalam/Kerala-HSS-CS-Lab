@@ -6,35 +6,35 @@ Computer science lab assignments for Kerala higher secondary students
 You can find the source code and output for sql, c++, html and php lab assignments here.
 
 ## Contents
- * C++
-  * Array 01 - Read N numbers, find their average and print the numbers
+ * **C++**
+  * `Array 01` - Read N numbers, find their average and print the numbers
     greater than the average
-  * Factorial - Read a number and find its factorial using recursion
-  * Linear Search 01 - Read adm no.s of N students, read another number,
+  * `Factorial` - Read a number and find its factorial using recursion
+  * `Linear Search 01` - Read adm no.s of N students, read another number,
     search it in the previously input list of numbers using linear search
-  * Pointer 01 - Program to create two pointers initialized with two numbers
+  * `Pointer 01` - Program to create two pointers initialized with two numbers
     and find their average
-  * String Length - Read a string, find its length *without* using `strlen`
-  * Struct 01 - Create a struct with the following details:
+  * `String Length` - Read a string, find its length *without* using `strlen`
+  * `Struct 01` - Create a struct with the following details:
       Emp. Code, Name, Basic Pay, DA, HRA, PF
     read the details of an employee and calculate his net salary
-  * Sum Of Digits - Read a number, output the sum of digits of that number
-  * Sum Of Squares - Display the sum of squares of first N natural numbers
-  * Swap - Program to swap the contents of two variables with a user defined
+  * `Sum Of Digits` - Read a number, output the sum of digits of that number
+  * `Sum Of Squares` - Display the sum of squares of first N natural numbers
+  * `Swap` - Program to swap the contents of two variables with a user defined
     function
-  * Switch Case 01 - Input a group code and print respective subject name using
+  * `Switch Case 01` - Input a group code and print respective subject name using
     switch case
 
- * HTML
-  * Table 01 - Design a webpage with given format of tables (Terrestrial Planets: NASA)
-  * Form 01 - Design an HTML form to accept the curriculum vitae of a job applicant
-  * Form 02 - Design an HTML form for accepting registrations for inter-school IT fair.
-  * List 01 - Designing a webpage containing list of tourist destinations in kerala
-  * Link-Mailto - Design a personal webpage for your friend. It should contain a link to his email address
+ * **HTML**
+  * `Table 01` - Design a webpage with given format of tables (Terrestrial Planets: NASA)
+  * `Form 01` - Design an HTML form to accept the curriculum vitae of a job applicant
+  * `Form 02` - Design an HTML form for accepting registrations for inter-school IT fair.
+  * `List 01` - Designing a webpage containing list of tourist destinations in kerala
+  * `Link-Mailto` - Design a personal webpage for your friend. It should contain a link to his email address
 
- * SQL
+ * **SQL**
   Pending
- * PHP
+ * **PHP**
   Pending
 
 ## Download
