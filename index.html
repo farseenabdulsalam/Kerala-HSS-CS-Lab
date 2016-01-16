@@ -1,11 +1,12 @@
 ---
 layout: default
+default: true
 ---
 
 <div id="home">
   {% for page in site.pages %}
   <div>
-  {% if page.show %}
+  {% if ! page.default %}
    {{ page.content }}
    {% endif %}
   </div>
