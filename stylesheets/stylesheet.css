@@ -622,12 +622,13 @@ form {
   letter-spacing: -1px;
 }
 
+/*
 #main-content h1:before {
   padding-right: 0.3em;
   margin-left: -0.9em;
   color: #9ddcff;
   content: "/";
-}
+}*/
 
 #main-content h2 {
   margin-bottom: 8px;
@@ -637,12 +638,13 @@ form {
   color: #474747;
   text-indent: 4px;
 }
+/*
 #main-content h2:before {
   padding-right: 0.3em;
   margin-left: -1.5em;
   content: "//";
   color: #9ddcff;
-}
+}*/
 
 #main-content h3 {
   margin-top: 24px;
@@ -654,12 +656,14 @@ form {
   text-indent: 3px;
 }
 
+/*
 #main-content h3:before {
   padding-right: 0.3em;
   margin-left: -2em;
   content: "///";
   color: #9ddcff;
-}
+}*/
+
 
 #main-content h4 {
   margin-bottom: 8px;
@@ -670,12 +674,14 @@ form {
   text-indent: 3px;
 }
 
+/*
 h4:before {
   padding-right: 0.3em;
   margin-left: -2.8em;
   content: "////";
   color: #9ddcff;
-}
+}*/
+
 
 #main-content h5 {
   margin-bottom: 8px;
@@ -684,12 +690,14 @@ h4:before {
   color: #474747;
   text-indent: 3px;
 }
+/*
 h5:before {
   padding-right: 0.3em;
   margin-left: -3.2em;
   content: "/////";
   color: #9ddcff;
-}
+}*/
+
 
 #main-content h6 {
   margin-bottom: 8px;
@@ -698,12 +706,14 @@ h5:before {
   color: #474747;
   text-indent: 3px;
 }
+/*
 h6:before {
   padding-right: 0.3em;
   margin-left: -3.7em;
   content: "//////";
   color: #9ddcff;
-}
+}*/
+
 
 p {
   margin-bottom: 20px;
@@ -753,6 +763,24 @@ dl dd {
 .clearfix {display: inline-block;}
 * html .clearfix {height: 1%;}
 .clearfix {display: block;}
+
+/* My checkboxes */
+li.box:before {
+	float: left;
+	width: 5px;
+	margin: 0 25px 0 5px;
+	content: "✘";
+	color: #d13b28;
+	left: -2px;
+}
+li.box_done:before {
+	content: "✔";
+  color: #2879D0;
+	float: left;
+	width: 5px;
+	margin: 0 25px 0 5px;
+	left: -2px;
+}
 
 /* #Media Queries
 ================================================== */
@@ -856,7 +884,6 @@ dl dd {
     content: none;
   }
 }
-
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
 @media only screen and (min-width: 480px) and (max-width: 767px) { }
 

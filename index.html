@@ -6,8 +6,8 @@ default: true
 <div id="home">
   {% for page in site.pages %}
   <div>
-  {% if ! page.default %}
-   {{ page.content | replace: '<li>[ ]', '<li class = "box">' | replace: '<li>[x]', '<li class = "box_done">'  }}
+  {% if page.default != true %}
+   {{ page.content }}
    {% endif %}
   </div>
   {% endfor %}
