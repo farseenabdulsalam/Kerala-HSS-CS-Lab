@@ -1,0 +1,51 @@
+#!/bin/bash
+
+_SOURCE_DIR="./htmlfiles"
+cd $_SOURCE_DIR
+
+if [ $# -lt 2 ]; then
+  echo "Usage:"
+  echo "      rename-project old_folder_name new_folder_name"
+  exit 0
+fi
+_quiet=false
+
+if [ $1 = "-q" ]; then _quiet=true; fi
+
+if [ "$1" = "$2" ]; then
+  echo "Error: old name and new name are same" 1>&2
+  exit 1
+fi
+
+if [ ! -d "$1" ]; then
+  echo "Error: \"$1\" is not a folder." 1>&2
+  exit 1
+fi
+
+if [ ! -f "$1/$1.html" ]; then
+  echo "Error: \"$1\" is not a valid project folder." 1>&2
+  exit 1
+fi
+
+if [ -d "$2" ]; then
+  echo "Error: \"$2\" already exists." 1>&2
+  exit 1
+fi
+if ( ! $_quiet ); then
+  read -p "Are you sure to move \"$1\" to \"$2\"? [y/N]:" -N 1 -r _reply
+  echo
+else
+  _reply=y
+fi
+
+case $_reply in
+  y|Y)
+    mv $1 $2
+    mv $2/$1.html $2/$2.html
+    if ( ! $_quiet ); then
+      echo "Moved \"$1\" to \"$2\"."
+    fi
+  ;;
+esac
+
+cd ..

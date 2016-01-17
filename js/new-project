@@ -1,0 +1,22 @@
+#!/bin/bash
+_SOURCE_DIR='./htmlfiles/'
+cd $_SOURCE_DIR;
+
+if [ $# -ne 1 -o "$1" = "-help" -o "$1" = "--help" -o "$1" = "-h" ]; then
+  echo "Creates a new html project."
+  echo "Usage:"
+  echo "      new-project <project-name>"
+  echo
+  exit 0
+fi
+
+if [ -e "$1" ]; then
+  echo "File already exists: \"$1\""
+  exit 1
+fi
+
+mkdir "$1"
+vim "$1/$1.html"
+cd ..
+./makeit "$1"
+exit

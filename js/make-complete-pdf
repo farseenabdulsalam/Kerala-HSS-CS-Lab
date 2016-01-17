@@ -1,0 +1,39 @@
+#!/bin/bash
+
+case "$1" in
+  "help"|"--help"|"-help"|"-h")
+    echo "Creates a pdf file combining the pdfs from all projects"
+    echo "Usage: make-complete-pdf"
+    echo
+    exit 0
+    ;;
+esac
+
+_SOURCE_DIR="./htmlfiles/"
+
+cd $_SOURCE_DIR
+
+folders=(*/)
+files=()
+for folder in ${folders[@]%/}; do
+  if [ ! -f "$folder/$folder.pdf" ]; then
+    echo " - Excluding $folder, $folder.pdf not found"
+  else
+    files+=("$folder/$folder.pdf")
+    echo " + Including $folder.pdf"
+  fi
+done
+
+if [[ -z "${files[@]}" ]]; then
+  echo " Error: No files to combine."
+  echo
+  exit 1
+fi
+
+echo "Combining ${files[@]}."
+read -p "Continue? [y/N] " -N 1 -r reply
+echo
+if [ ${reply^^} = "Y" ]; then
+  pdfunite ../PDF/src/cover.pdf ${files[@]} ../PDF/HTML.pdf 
+  echo " ++ Created HTML.pdf"
+fi
