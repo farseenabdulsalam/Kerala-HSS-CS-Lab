@@ -1,0 +1,4 @@
+school_name:KPC HSS
+user_name:User
+pw:Password
+mobile:9876543210

@@ -1,0 +1,6 @@
+
+body {
+  font-family: Fantasque Sans Mono,Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  font-size:12px;
+}
+input { width:10em; height:2em; margin:0.2em;}

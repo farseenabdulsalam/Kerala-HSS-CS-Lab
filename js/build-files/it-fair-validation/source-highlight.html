@@ -1,0 +1,78 @@
+<style>
+body,pre,tt {
+  font-family: Fantasque Sans Mono,Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  font-size:12px;
+}
+
+h1 {
+  text-shadow: 1px 1px 1px #ccc;
+  border: solid 1px #eee;
+  padding: 0.5em
+}
+
+tt {
+  background-color: rgb(240, 240, 240);
+  display: block;
+  padding: 1em;
+  border: solid 1px #eee;
+}
+
+body{
+  padding: 1.5em;
+}
+
+</style>
+<h1>it-fair-validation.html source</h1><!-- Generator: GNU source-highlight 3.1.8
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><i><font color="#9A1900">&lt;!--</font></i>
+<i><font color="#9A1900">Develop a web page for the interschool IT fair conducted by your school .the webpage should contain facility to enter school name,user name, password, &amp; a mobile phone no. It should also contain a button for saving &amp; clearing the data entered. Ensure that the data is entered in all the text boxes &amp; the text box for mobile no. Contains only numbers.write JavaScript for this validation.</font></i>
+<i><font color="#9A1900">--&gt;</font></i>
+
+<b><font color="#0000FF">&lt;html&gt;</font></b>
+  <b><font color="#0000FF">&lt;head&gt;</font></b> 
+    <b><font color="#0000FF">&lt;title&gt;</font></b> Registration - Interschool IT Fair <b><font color="#0000FF">&lt;/title&gt;</font></b> 
+  
+    <b><font color="#0000FF">&lt;script&gt;</font></b>
+      <b><font color="#0000FF">function</font></b> <b><font color="#000000">validate</font></b><font color="#990000">()</font> <font color="#FF0000">{</font>
+        <b><font color="#0000FF">if</font></b><font color="#990000">(</font> document<font color="#990000">.</font>form1<font color="#990000">.</font>school_name<font color="#990000">.</font>value <font color="#990000">==</font> <font color="#FF0000">""</font> <font color="#990000">)</font> <font color="#FF0000">{</font>
+          <b><font color="#000000">alert</font></b><font color="#990000">(</font><font color="#FF0000">"Please enter school name"</font><font color="#990000">);</font>
+          <b><font color="#0000FF">return</font></b><font color="#990000">;</font>
+        <font color="#FF0000">}</font>
+        <b><font color="#0000FF">if</font></b><font color="#990000">(</font> document<font color="#990000">.</font>form1<font color="#990000">.</font>user_name<font color="#990000">.</font>value <font color="#990000">==</font> <font color="#FF0000">""</font> <font color="#990000">)</font> <font color="#FF0000">{</font>
+          <b><font color="#000000">alert</font></b><font color="#990000">(</font><font color="#FF0000">"Please enter user name"</font><font color="#990000">);</font>
+          <b><font color="#0000FF">return</font></b><font color="#990000">;</font>
+        <font color="#FF0000">}</font>
+        <b><font color="#0000FF">if</font></b><font color="#990000">(</font> document<font color="#990000">.</font>form1<font color="#990000">.</font>pw<font color="#990000">.</font>value <font color="#990000">==</font> <font color="#FF0000">""</font> <font color="#990000">)</font> <font color="#FF0000">{</font>
+          <b><font color="#000000">alert</font></b><font color="#990000">(</font><font color="#FF0000">"Please enter password"</font><font color="#990000">);</font>
+          <b><font color="#0000FF">return</font></b> <b><font color="#0000FF">false</font></b><font color="#990000">;</font>
+        <font color="#FF0000">}</font>
+        <b><font color="#0000FF">if</font></b><font color="#990000">(</font> document<font color="#990000">.</font>form1<font color="#990000">.</font>mobile<font color="#990000">.</font>value <font color="#990000">==</font> <font color="#FF0000">""</font> <font color="#990000">)</font> <font color="#FF0000">{</font>
+          <b><font color="#000000">alert</font></b><font color="#990000">(</font><font color="#FF0000">"Please enter mobile number"</font><font color="#990000">);</font>
+          <b><font color="#0000FF">return</font></b><font color="#990000">;</font>
+        <font color="#FF0000">}</font>
+        <b><font color="#0000FF">if</font></b><font color="#990000">(</font> <b><font color="#000000">isNaN</font></b><font color="#990000">(</font>document<font color="#990000">.</font>form1<font color="#990000">.</font>mobile<font color="#990000">.</font>value<font color="#990000">)</font> <font color="#990000">)</font> <font color="#FF0000">{</font>
+          <b><font color="#000000">alert</font></b><font color="#990000">(</font><font color="#FF0000">"Mobile number should only contain numbers"</font><font color="#990000">);</font>
+          <b><font color="#0000FF">return</font></b><font color="#990000">;</font>
+        <font color="#FF0000">}</font>
+      <font color="#FF0000">}</font>
+    <b><font color="#0000FF">&lt;/script&gt;</font></b>
+  <b><font color="#0000FF">&lt;/head&gt;</font></b>
+
+  <b><font color="#0000FF">&lt;body&gt;</font></b>
+    <b><font color="#0000FF">&lt;h1&gt;</font></b>Registration - Interschool IT Fair<b><font color="#0000FF">&lt;/h1&gt;</font></b>
+
+    <b><font color="#0000FF">&lt;form</font></b> <font color="#009900">name</font><font color="#990000">=</font><font color="#FF0000">form1 action</font>=<font color="#009900">register</font>.<font color="#009900">php</font> <font color="#009900">method</font><font color="#990000">=</font><font color="#FF0000">POST</font><b><font color="#0000FF">&gt;</font></b>
+
+      School name: <b><font color="#0000FF">&lt;input</font></b> <font color="#009900">type</font><font color="#990000">=</font><font color="#FF0000">text name</font>=<font color="#009900">school</font>_<font color="#009900">name</font><b><font color="#0000FF">&gt;</font></b> <b><font color="#0000FF">&lt;br&gt;</font></b>
+      User name  : <b><font color="#0000FF">&lt;input</font></b> <font color="#009900">type</font><font color="#990000">=</font><font color="#FF0000">text name</font>=<font color="#009900">user</font>_<font color="#009900">name</font><b><font color="#0000FF">&gt;</font></b> <b><font color="#0000FF">&lt;br&gt;</font></b>
+      Password   : <b><font color="#0000FF">&lt;input</font></b> <font color="#009900">type</font><font color="#990000">=</font><font color="#FF0000">password name</font>=<font color="#009900">pw</font><b><font color="#0000FF">&gt;</font></b> <b><font color="#0000FF">&lt;br&gt;</font></b>
+      Mobile No.     : <b><font color="#0000FF">&lt;input</font></b> <font color="#009900">type</font><font color="#990000">=</font><font color="#FF0000">text name</font>=<font color="#009900">mobile</font><b><font color="#0000FF">&gt;</font></b> <b><font color="#0000FF">&lt;br&gt;</font></b> <b><font color="#0000FF">&lt;br&gt;</font></b>
+
+      <b><font color="#0000FF">&lt;input</font></b> <font color="#009900">type</font><font color="#990000">=</font><font color="#FF0000">button value</font>=<font color="#009900">Submit</font> <font color="#009900">onclick</font><font color="#990000">=</font><font color="#FF0000">validate()</font><b><font color="#0000FF">&gt;</font></b> <b><font color="#0000FF">&lt;input</font></b> <font color="#009900">type</font><font color="#990000">=</font><font color="#FF0000">reset value</font>=<font color="#009900">Clear</font><b><font color="#0000FF">&gt;</font></b>
+
+      <b><font color="#0000FF">&lt;/form&gt;</font></b>
+  <b><font color="#0000FF">&lt;/body&gt;</font></b>
+<b><font color="#0000FF">&lt;/html&gt;</font></b>
+</tt></pre>

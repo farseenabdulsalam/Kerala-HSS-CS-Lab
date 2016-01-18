@@ -1,0 +1,21 @@
+body,pre,tt {
+  font-family: Fantasque Sans Mono,Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  font-size:12px;
+}
+
+h1 {
+  text-shadow: 1px 1px 1px #ccc;
+  border: solid 1px #eee;
+  padding: 0.5em
+}
+
+tt {
+  background-color: rgb(240, 240, 240);
+  display: block;
+  padding: 1em;
+  border: solid 1px #eee;
+}
+
+body{
+  padding: 1.5em;
+}

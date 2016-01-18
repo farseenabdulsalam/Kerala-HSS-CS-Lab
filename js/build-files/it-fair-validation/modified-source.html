@@ -1,0 +1,66 @@
+<!--
+Develop a web page for the interschool IT fair conducted by your school .the webpage should contain facility to enter school name,user name, password, & a mobile phone no. It should also contain a button for saving & clearing the data entered. Ensure that the data is entered in all the text boxes & the text box for mobile no. Contains only numbers.write JavaScript for this validation.
+-->
+
+<html>
+  <head> 
+    <title> Registration - Interschool IT Fair </title> 
+  
+    <script>
+      function validate() {
+        if( document.form1.school_name.value == "" ) {
+          alert("Please enter school name");
+          return;
+        }
+        if( document.form1.user_name.value == "" ) {
+          alert("Please enter user name");
+          return;
+        }
+        if( document.form1.pw.value == "" ) {
+          alert("Please enter password");
+          return false;
+        }
+        if( document.form1.mobile.value == "" ) {
+          alert("Please enter mobile number");
+          return;
+        }
+        if( isNaN(document.form1.mobile.value) ) {
+          alert("Mobile number should only contain numbers");
+          return;
+        }
+      }
+    </script>
+  <style>
+
+body {
+  font-family: Fantasque Sans Mono,Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  font-size:12px;
+}
+input { width:10em; height:2em; margin:0.2em;}
+
+</style>
+</head>
+
+  <body><h1>it-fair-validation.html output</h1><hr>
+
+    <h1>Registration - Interschool IT Fair</h1>
+
+    <form name=form1 action=register.php method=POST>
+
+      School name: <input type=text name=school_name> <br>
+      User name  : <input type=text name=user_name> <br>
+      Password   : <input type=password name=pw> <br>
+      Mobile No.     : <input type=text name=mobile> <br> <br>
+
+      <input type=button value=Submit onclick=validate()> <input type=reset value=Clear>
+
+      </form>
+  <script>
+document.getElementsByName('school_name')[0].value='KPC HSS'
+document.getElementsByName('user_name')[0].value='User'
+document.getElementsByName('pw')[0].value='Password'
+document.getElementsByName('mobile')[0].value='9876543210'
+
+</script>
+</body>
+</html>

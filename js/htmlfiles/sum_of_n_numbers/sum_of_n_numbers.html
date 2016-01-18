@@ -1,0 +1,32 @@
+<!--
+  Develop a webpage with two text boxes & a button labeled "show".the user can enter a number in the first text box.in clicking the button ,the second text box should display the sum of all natural numbers upto the given number . write the required JavaScript.
+-->
+
+<html>
+  <head>
+    <title>Sum of first N natural numbers</title>
+    <script>
+      function findsum() {
+        var n = Number(document.form1.number_n.value)
+        var sum = 0
+        for(var i=1;i<=n;i++) sum+=i
+        document.form1.sum.value=sum
+      }
+    </script>
+    <!-- Students can ignore style tag -->
+    <style>
+     body {font-family: Fantasque Sans Mono, Ubuntu Mono, monospace;}
+     input { width:10em; height:2em; margin:0.2em;}
+    </style>
+  </head>
+  <body>
+    <h1>Sum of first N natural numbers</h1>
+    <form name=form1>
+      Enter a number: <input type=text name=number_n><br>
+      The sum is: <input type=text name=sum><br>
+      <input type=button value="Show" onclick=findsum()>
+    </form>
+  </body>
+</html>
+
+
