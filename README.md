@@ -32,6 +32,10 @@ You can find the source code and output for sql, c++, html and php lab assignmen
   * `List 01` - Designing a webpage containing list of tourist destinations in kerala
   * `Link-Mailto` - Design a personal webpage for your friend. It should contain a link to his email address
 
+ * **Javascript**
+  * Interschool IT Fair form validation
+  * Sum of first n natural numbers
+
  * **SQL**
   Pending
  * **PHP**
@@ -41,6 +45,7 @@ You can find the source code and output for sql, c++, html and php lab assignmen
  * [master,zip] (https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/zipball/master/) all files in a zip file
  * [CPP.pdf] (https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/raw/master/cpp/PDF/CPP.pdf) which contains all C++ program source code and output.
  * [HTML.pdf] (https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/raw/master/html/PDF/HTML.pdf) which contains all html source code and output.
+ * [JS.pdf] (https://github.com/farseenabdulsalam/Kerala-HSS-CS-Lab/raw/master/js/PDF/JS.pdf) which contains all javascript (with required html) source code and output.
 
  I'll upload other files when I get free time
 
@@ -55,8 +60,9 @@ You can find the source code and output for sql, c++, html and php lab assignmen
   Run `command help` to know more about those commands.
 
 ## Work in progress
- * [x] C++ Completed.
+ * [x] C++ Completed
  * [x] HTML Completed
+ * [x] Javascript Completed
  * [ ] SQL Pending
  * [ ] PHP Pending
 
