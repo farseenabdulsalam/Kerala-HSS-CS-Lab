@@ -1,2 +1,2 @@
 #!/bin/bash
-wkhtmltopdf cover PDF/src/PDFCover.html PDF/src/cover.pdf
+wkhtmltopdf cover extra-src/PDFCover.html build-files/cover.pdf

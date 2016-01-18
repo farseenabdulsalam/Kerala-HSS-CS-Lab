@@ -45,7 +45,7 @@ def build_form_input_script(project,force=False):
 
     for line in prj_input_file:
         line = line.strip()
-
+        if not line: continue
         if line.startswith("%"):
             line=line[1:]
             action,element = line.split(" ")

@@ -9,18 +9,18 @@ case "$1" in
     ;;
 esac
 
-_SOURCE_DIR="./htmlfiles/"
+_SOURCE_DIR="./build-files/"
 
 cd $_SOURCE_DIR
 
 folders=(*/)
 files=()
 for folder in ${folders[@]%/}; do
-  if [ ! -f "$folder/$folder.pdf" ]; then
-    echo " - Excluding $folder, $folder.pdf not found"
+  if [ ! -f "$folder/output.pdf" ]; then
+    echo " - Excluding $folder, output.pdf not found"
   else
-    files+=("$folder/$folder.pdf")
-    echo " + Including $folder.pdf"
+    files+=("$folder/output.pdf")
+    echo " + Including output.pdf"
   fi
 done
 
@@ -34,6 +34,6 @@ echo "Combining ${files[@]}."
 read -p "Continue? [y/N] " -N 1 -r reply
 echo
 if [ ${reply^^} = "Y" ]; then
-  pdfunite ../PDF/src/cover.pdf ${files[@]} ../PDF/HTML.pdf 
+  pdfunite ../build-files/cover.pdf ${files[@]} ../PDF/JS.pdf 
   echo " ++ Created HTML.pdf"
 fi
