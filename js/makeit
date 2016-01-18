@@ -1,84 +1,194 @@
-#!/bin/bash
+#!/bin/python
+import subprocess
+import argparse
+import os
 
-_SOURCE_DIR="./htmlfiles"
+SOURCE_DIR = "./htmlfiles"
+PROJECT_INPUT_NAME="input.txt"
+PROJECT_SOURCE_NAME="source.html"
 
-cd $_SOURCE_DIR
+BUILD_DIR = "./build-files"
+BUILD_INPUT_JS_NAME="input.js"
+BUILD_SOURCE_HTML_NAME="source-highlight.html" #syntax highlighted version of source
+BUILD_OUTPUT_HTML_NAME="modified-source.html" #modified source to add form input and some style
+BUILD_OUTPUT_PDF_NAME="output.pdf"
 
-# Combine source code and output to a syntax highlighted
-# pdf
-function make_pdf {
-  if [ ! -d "$1" ]; then
-    return 1;
-  fi
+EXTRA_SRC_DIR = "./extra-src"
+EXTRA_SOURCE_CSS_NAME = "source-css.css"
+EXTRA_OUTPUT_CSS_NAME = "output-css.css"
 
-  if [ ! -f "$1/$1.html" ]; then
-    return 2;
-  fi
+def get_project_dir(project):
+    return os.path.join(SOURCE_DIR,project)
 
-  if [ "$2" != "force" -a "$1/$1.pdf" -nt "$1/$1.html" ]; then
-    echo " - $1/$1.pdf up to date "
-    return 0
-  fi
+def get_build_dir(project):
+    build_dir=os.path.join(BUILD_DIR,project)
+    if not os.path.exists(build_dir):
+        os.makedirs(build_dir)
+    return build_dir
 
-  echo "<H1>${1^^}.HTML source</H1><BR>">"$1/head.tmp"
-  echo "<style> body,pre,tt { font-family: Fantasque Sans Mono,Consolas, Menlo, Monaco,\
-Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono,\
-Courier New, monospace;font-size:12px; } h1 {text-shadow: 1px 1px 1px #ccc;border: solid 1px #eee;padding: 0.5em}\
-tt {background-color: rgb(240, 240, 240);display: block;padding: 1em;border: solid 1px #eee;}\
-body{padding: 1.5em;}</style>">"$1/foot.tmp"
+def get_project_file(project,f):
+    return os.path.join(get_project_dir(project),f)
 
-source-highlight -i "$1/$1.html" -o "$1/source.html" -H "$1/head.tmp" -F "$1/foot.tmp"
+def get_build_file(project,f):
+    return os.path.join(get_build_dir(project),f)
 
-  echo "<H1>${1^^}.HTML output</H1><BR>">"$1/head.tmp"
+def get_extra_src_file(f):
+    return os.path.join(EXTRA_SRC_DIR,f)
 
-  cat "$1/head.tmp" "$1/$1.html" >"$1/output.html"
+def build_form_input_script(project,force=False):
+    prj_input = get_project_file(project,PROJECT_INPUT_NAME)
+    prj_input_file = open(prj_input)
 
-  rm "$1/head.tmp" "$1/foot.tmp"
-  wkhtmltopdf page "$1/source.html" page "$1/output.html" "$1/$1.pdf" >>wkhtmltopdf.log
-  if [ $? -ne 0 ]; then
-    echo " X Failed to create $1/$1.pdf. Please check the logs"
-  fi
-  rm "$1/source.html" "$1/output.html"
-  echo " + Created $1/$1.pdf"
-}
-################ main #####################
+    script_header=""
+    script_footer=""
+    script_content=""
 
-# no arg or arg is help
-if [ "$1" = "help" ]; then
-  echo "makeit: Create PDF file containing source and output from HTML."
-  echo "Syntax: makeit [--force] [<project-folder>]"
-  echo "Requires: bash (version>=4.0) for this script"
-  echo "          gcc for compiling c++"
-  echo "          awk, script for combining input and output"
-  echo "          source-highlight for creating syntax-highlighted html from source"
-  echo "          wkhtmltopdf for converting html to pdf"
-  exit 0
-fi
+    for line in prj_input_file:
+        line = line.strip()
 
-_projects=(*/)
-_force=""
-case $1 in
-  "--force") _force="force"; shift;;
-esac
+        if line.startswith("%"):
+            line=line[1:]
+            action,element = line.split(" ")
+            if action == "submit":
+                if element.startswith("#"): element = element[1:]
+                script_content+="document.forms['"+element+"'].submit();"
+                script_content+="\n"
+            elif action == "click":
+                if element.startswith("#"):
+                    element=element[1:]
+                    script_content+="document.getElementById('"+element+"').click()"
+                    script_content+="\n"
+                else:
+                    script_content+="document.getElementsByName('"+element+"')[0].click();\n"
+                    script_content+="\n"
+            else:
+                raise Exception('Invalid action in '+prj_input_file+': '+action)
 
-#if project name is present, only compile given projs
-if [ ! -z "$1" ]; then
-  _projects=($*)
-fi
+        else:
+            name,value = line.split(":")
+            if name.startswith("#"):
+                name=name[1:]
+                script_content+="document.getElementById('"+name+"').value='"+value+"'"
+                script_content+="\n"
+            else:
+                script_content+="document.getElementsByName('"+name+"')[0].value='"+value+"'"
+                script_content+="\n"
 
-echo "Projects: ${_projects[@]%/}"
-echo
+    input_js_file = open(get_build_file(project,BUILD_INPUT_JS_NAME),"w")
+    input_js_file.write(script_content)
+    input_js_file.close()
+
+def build_modified_html_output(project):
+    orig_html_text = open(get_project_file(project,PROJECT_SOURCE_NAME)).read()
+    new_html_file = open(get_build_file(project,BUILD_OUTPUT_HTML_NAME),'w')
+    new_html_text = ""
+
+    output_css_text = open(get_extra_src_file(EXTRA_OUTPUT_CSS_NAME)).read()
+    form_input_js_text = open(get_build_file(project,BUILD_INPUT_JS_NAME)).read()
+
+    index_of_body = orig_html_text.find("<body")
+    index_of_body_tag_end = orig_html_text.find(">",index_of_body)
+
+    index_of_headend_tag = orig_html_text.find("</head>")
+    index_of_bodyend_tag = orig_html_text.find("</body>")
+
+    new_html_text = orig_html_text[0:index_of_headend_tag]+\
+                    "<style>\n"+\
+                    output_css_text+\
+                    "\n</style>\n"+\
+                    orig_html_text[index_of_headend_tag:index_of_body_tag_end+1]+\
+                    "<h1>"+project+".html output</h1><hr>\n"+\
+                    orig_html_text[index_of_body_tag_end+1:index_of_bodyend_tag]+\
+                    "<script>\n"+\
+                    form_input_js_text+\
+                    "\n</script>\n"+\
+                    orig_html_text[index_of_bodyend_tag:]
+    new_html_file.write(new_html_text)
+    new_html_file.close()
+
+def build_syntax_highlighted_source_html(project):
+    command_string = "source-highlight -i "+\
+                     get_project_file(project,PROJECT_SOURCE_NAME)+\
+                     " -o "+\
+                     get_build_file(project,BUILD_SOURCE_HTML_NAME)
+    if subprocess.call(command_string.split())!=0:
+        raise Exception("Couldnot create source-highlighted output")
+
+    old_html_text = open(get_build_file(project,BUILD_SOURCE_HTML_NAME)).read()
+    new_html_file = open(get_build_file(project,BUILD_SOURCE_HTML_NAME),'w')
+    new_html_text = ""
+
+    source_css_text = open(get_extra_src_file(EXTRA_SOURCE_CSS_NAME)).read()
+
+    index_of_body_tag = old_html_text.find("<body")
+    index_of_body_tag_end = old_html_text.find(">",index_of_body_tag)
+
+    new_html_text = old_html_text[0:index_of_body_tag_end+1]+\
+                    "<style>\n"+\
+                    source_css_text+\
+                    "\n</style>\n"+\
+                    "<h1>"+project+".html source</h1>"+\
+                    old_html_text[index_of_body_tag_end+1:]
+
+    new_html_file.write(new_html_text)
+    new_html_file.close()
+
+def build_pdf(project):
+    command_string = "wkhtmltopdf"+\
+                     " page "+get_build_file(project,BUILD_SOURCE_HTML_NAME)+\
+                     " page "+get_build_file(project,BUILD_OUTPUT_HTML_NAME)+\
+                     " "+get_build_file(project,BUILD_OUTPUT_PDF_NAME)
+
+    if subprocess.call(command_string.split())!=0:
+        raise Exception("Couldnot create pdf file")
+
+def is_project_dir_valid(project_dir):
+    return os.path.isdir(os.path.join(SOURCE_DIR,project_dir)) and\
+           os.path.exists(os.path.join(SOURCE_DIR,project_dir,PROJECT_SOURCE_NAME))
 
 
-function compile_pdf_from_array {
-  for project in ${_projects[@]%/}; do
-    make_pdf "$project" "$_force"
-    if [ $? -ne 0 ]; then
-      echo " X Invalid project folder or source not found: $project"
-      return 1
-    fi
-  done
-}
-compile_pdf_from_array
-cd ..
-exit 0
+def list_of_projects():
+    return [project_dir for project_dir in os.listdir(SOURCE_DIR)
+                if is_project_dir_valid(project_dir)]
+
+
+
+################MAIN###############
+
+def main():
+    parser = argparse.ArgumentParser(
+    description="Automate creation of pdfs containing source code and output")
+
+    parser.add_argument('--force','-f',
+            action='store_true',
+            help='Force compilation, even if files are not modified')
+    parser.add_argument('project',nargs='*',
+            help='The project to compile. If empty, will compile all projects')
+
+    args = parser.parse_args()
+
+    projects = [ project for project in args.project
+                if is_project_dir_valid(project) ]
+
+    if not projects:
+        projects = list_of_projects()
+
+    for  project in projects:
+        print("Project: %s" % project)
+        print("---------------------")
+        print("Applying %s.." % PROJECT_INPUT_NAME)
+        build_form_input_script(project)
+        print("Adding style to %s.." % PROJECT_SOURCE_NAME)
+        build_modified_html_output(project)
+        print("Creating syntax-highlighted source..")
+        build_syntax_highlighted_source_html(project)
+        print("Building PDF")
+        build_pdf(project)
+        print("---------------------")
+
+
+
+
+if __name__ == "__main__":
+    main()
+
